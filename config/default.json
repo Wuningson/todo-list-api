@@ -1,0 +1,4 @@
+{
+  "mongo_URI": "mongodb+srv://Administrator:chris1234@cluster0-knoto.mongodb.net/test?retryWrites=true&w=majority",
+  "JWT_SECRET": "Cuatro abrazos y un café"
+}
