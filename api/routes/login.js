@@ -3,6 +3,7 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const config = require('config');
+
 const secret = config.get('JWT_SECRET');
 const User = require('../models/User');
 
@@ -18,10 +19,10 @@ router.post('/', (req, res) => {
         });
       }
       if(result){
-        const token = jwt.sign({email, firstName: user.firstName, lastName: user.lastName}, secret, {expiresIn: "2h"});
+        const token = jwt.sign({email, firstName: user.firstName, lastName: user.lastName}, secret, {expiresIn: "200000000h"});
+        res.cookie('token', token);
         res.status(200).json({
-          message: `Auth Successful`,
-          token
+          message: `Auth Successful`
         });
       }
     });

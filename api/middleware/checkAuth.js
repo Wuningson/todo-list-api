@@ -1,11 +1,13 @@
 const jwt = require('jsonwebtoken');
+const config = require('config');
+const secret = config.get('JWT_SECRET');
 
 module.exports = (req, res, next) => {
   try {
-    const token = req.headers.authorization.split(' ')[1];
+    const { token } = req.cookies;
     console.log(`Token gotten successfully ${token}`);
-    const decoded = jwt.verify(token, process.env.JWT_KEY);
-    console.log(`Token decoded user data is ${decoded}`);
+    const decoded = jwt.verify(token, secret);
+    console.log(`Token decoded user data is ${decoded.email}`);
     req.userData = decoded;
     next();
   }catch(error){

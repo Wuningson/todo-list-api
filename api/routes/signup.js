@@ -10,6 +10,7 @@ router.post('/', (req, res) => {
     .exec()
     .then(user => {
       if (user.length >= 1) {
+        console.log(`User already exists`);
         return res.status(409).json({
           message: 'Mail already exists'
         })
@@ -29,7 +30,11 @@ router.post('/', (req, res) => {
             });
             user.save()
               .then(result => {
-                console.log(result)
+                console.log(result);
+                res.status(201).json({
+                  result,
+                  message: `User successfully created`
+                })
               })
               .catch(err => {
                 console.log(err);
